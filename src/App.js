@@ -1,24 +1,44 @@
-import logo from './logo.svg';
-import './App.css';
+import "./styles/App.css";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { Provider } from "react-redux";
+import { PersistGate } from "redux-persist/integration/react";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
+import { primaryColor, darkPrimary } from "./styles/colors";
+import Header from "./components/Header/Header";
+import BlogView from "./components/BlogView/BlogView";
+import NotFound from "./components/NotFound/NotFound";
+import Home from "./components/Home/Home";
+import Alert from "./components/Alert/Alert";
+import store, { persistor } from "./store";
+
+const theme = createMuiTheme({
+  palette: {
+    primary: {
+      main: primaryColor,
+    },
+    secondary: {
+      main: darkPrimary,
+    },
+  },
+});
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
+        <Router>
+          <ThemeProvider theme={theme}>
+            <Header />
+            <Alert />
+            <Switch>
+              <Route exact path="/" component={Home} />
+              <Route exact path="/blog-view" component={BlogView} />
+              <Route component={NotFound} />
+            </Switch>
+          </ThemeProvider>
+        </Router>
+      </PersistGate>
+    </Provider>
   );
 }
 
