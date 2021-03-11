@@ -23,7 +23,6 @@ const BlogView = ({ current, history, removeCurrent, likeBlog }) => {
     if (isEmpty(current)) history.push("/");
   }, current);
   const onLike = () => {
-    console.log("ajaja");
     likeBlog(id);
   };
 

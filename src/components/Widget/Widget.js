@@ -16,12 +16,9 @@ const Widget = ({
   sort,
   setSort,
 }) => {
-  // const [sort, setSort] = useState({});
   const onCreate = () => {
     openFormModal();
   };
-
-  console.log("isFilteredByFavourite", isFilteredByFavourite);
 
   const onSort = (type) => () => {
     if (type !== sort.type) {
@@ -45,8 +42,6 @@ const Widget = ({
     }
   };
 
-  console.log("mysort", sort);
-
   const buttonStyle = isFilteredByFavourite
     ? {
         background: "#6D7D8B",
@@ -61,31 +56,6 @@ const Widget = ({
         fontSize: 10,
       };
 
-  // () => {
-  //   if (sort.type !== "title") {
-  //     setSort({
-  //       type: "title",
-  //       asc: true,
-  //       des: false,
-  //     });
-  //   }
-
-  //   if (sort.type === "title" && sort.asc) {
-  //     setSort({
-  //       type: "title",
-  //       asc: false,
-  //       des: true,
-  //     });
-  //   }
-
-  //   if (sort.type === "title" && sort.des) {
-  //     setSort({
-  //       type: "title",
-  //       asc: false,
-  //       des: false,
-  //     });
-  //   }
-  // };
   return (
     <WidgetContainer>
       <Wrapper>

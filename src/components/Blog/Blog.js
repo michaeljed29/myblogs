@@ -36,8 +36,6 @@ const Blog = ({
   const [isOpenConfirmation, setIsOpenConfirmation] = useState(false);
   const { id, title, description, content, liked, createdAt } = blog;
 
-  console.log("blog", blog);
-
   const onSeaMore = () => {
     setCurrent(blog);
     history.push("/blog-view");

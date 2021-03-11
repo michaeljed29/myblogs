@@ -6,8 +6,6 @@ import { removeAlert } from "../../actions/utilAction";
 import Fade from "@material-ui/core/Fade";
 
 const Alert = ({ alert, isOpenAlert, removeAlert }) => {
-  console.log("alert", alert);
-  console.log("isOpenAlert", isOpenAlert);
   return (
     <Snackbar
       autoHideDuration={5000}

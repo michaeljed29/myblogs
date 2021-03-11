@@ -16,39 +16,10 @@ const Blogs = ({
   blogPerPage,
   setCurrentBlogCount,
 }) => {
-  console.log("blogs", blogs);
-  console.log("searchKey", searchKey);
-  console.log("thisissort", sort);
-
-  // const [currentPage, setCurrentPage] = useState(1);
-  // const [blogPerPage, setBlogPerPage] = useState(4);
   let blogList = blogs;
-  // const [blogs, setBlogs] = useState([
-  //   {
-  //     title: "This is my sample title",
-  //     description:
-  //       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-  //     content:
-  //       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-  //     liked: true,
-  //     createdAt: "2021-03-05",
-  //   },
-  //   {
-  //     title: "This is my sample title 2",
-  //     description:
-  //       "2 Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. ",
-  //     content:
-  //       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-  //     liked: false,
-  //     createdAt: "2021-03-05",
-  //   },
-  // ]);
 
   if (searchKey) {
-    console.log("search", blogList);
     blogList = blogs.filter(({ title, description }) => {
-      // console.log("title", title.includes(s));
-
       const query = searchKey.toLowerCase();
       return (
         title.toLowerCase().includes(query) ||
@@ -64,8 +35,6 @@ const Blogs = ({
   useEffect(() => {
     setCurrentBlogCount(blogList.length);
   }, [blogList]);
-
-  console.log("before", blogList);
 
   const indexLastBlog = currentPage * blogPerPage;
   const indexFirstBlog = indexLastBlog - blogPerPage;

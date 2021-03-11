@@ -96,12 +96,8 @@ const Home = ({
   const onChange = (e) => setBlog({ ...blog, [e.target.name]: e.target.value });
 
   const onPaginate = (e, page) => {
-    console.log("data", e);
-    console.log("page", page);
     setCurrentPage(page);
   };
-  console.log("currentBlogCount", currentBlogCount);
-  console.log("blogPerPage", blogPerPage);
 
   const pageCount = Math.ceil(currentBlogCount / blogPerPage);
 
