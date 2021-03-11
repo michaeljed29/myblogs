@@ -74,6 +74,7 @@ export default (state = initialState, action) => {
       return {
         ...state,
         isFilteredByFavourite: !state.isFilteredByFavourite,
+        currentPage: 1,
       };
     case SET_CURRENT_PAGE:
       return {
