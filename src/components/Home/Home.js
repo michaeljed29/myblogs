@@ -77,7 +77,7 @@ const Home = ({ history }) => {
     if (!isEmpty(current)) {
       dispatch(editBlog(blog));
       setBlog(initialBlog);
-      closeFormModal();
+      dispatch(closeFormModal());
       dispatch(
         setAlert({ type: "success", msg: "Blog Successfully updated!" })
       );
@@ -86,7 +86,7 @@ const Home = ({ history }) => {
 
     dispatch(addBlog(blog));
     setBlog(initialBlog);
-    closeFormModal();
+    dispatch(closeFormModal());
     dispatch(setAlert({ type: "success", msg: "Blog Successfully added!" }));
   };
 
@@ -227,6 +227,7 @@ const Home = ({ history }) => {
               onChange={onPaginate}
               size="large"
               color="secondary"
+              page={currentPage}
             />
           </PaginationWrapper>
         )}
