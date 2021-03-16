@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   Header as HeaderTag,
   Logo,
@@ -10,12 +10,13 @@ import { Link } from "react-router-dom";
 import SearchIcon from "@material-ui/icons/Search";
 import { searchBlog } from "../../actions/blogAction";
 
-const Header = ({ searchBlog }) => {
+const Header = () => {
+  const dispatch = useDispatch();
   const [searchKey, setSearchKey] = useState("");
   const onChange = (e) => setSearchKey(e.target.value);
   const onSearch = (e) => {
     e.preventDefault();
-    searchBlog(searchKey);
+    dispatch(searchBlog(searchKey));
     setSearchKey("");
   };
 
@@ -42,12 +43,4 @@ const Header = ({ searchBlog }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  searchKey: state.blog.searchKey,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  searchBlog: (searchKey) => dispatch(searchBlog(searchKey)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Header);
+export default Header;

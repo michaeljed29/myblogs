@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import moment from "moment";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -24,37 +24,30 @@ import IconButton from "@material-ui/core/IconButton";
 import { likeBlog, setCurrent, removeBlog } from "../../actions/blogAction";
 import { openFormModal, setAlert } from "../../actions/utilAction";
 
-const Blog = ({
-  blog,
-  history,
-  likeBlog,
-  setCurrent,
-  openFormModal,
-  setAlert,
-  removeBlog,
-}) => {
+const Blog = ({ history, blog }) => {
+  const dispatch = useDispatch();
   const [isOpenConfirmation, setIsOpenConfirmation] = useState(false);
   const { id, title, description, content, liked, createdAt } = blog;
 
   const onSeaMore = () => {
-    setCurrent(blog);
+    dispatch(setCurrent(blog));
     history.push("/blog-view");
   };
 
   const onEdit = () => {
-    setCurrent(blog);
-    openFormModal();
+    dispatch(setCurrent(blog));
+    dispatch(openFormModal());
   };
 
   const onDelete = () => {
-    removeBlog(id);
+    dispatch(removeBlog(id));
     setIsOpenConfirmation(false);
 
-    setAlert({ type: "success", msg: "Blog Successfully deleted" });
+    dispatch(setAlert({ type: "success", msg: "Blog Successfully deleted" }));
   };
 
   const onLike = () => {
-    likeBlog(id);
+    dispatch(likeBlog(id));
   };
 
   const onCancelDelete = () => {
@@ -140,14 +133,4 @@ const Blog = ({
   );
 };
 
-const mapStateToProps = (state) => ({});
-
-const mapDispatchToProps = (dispatch) => ({
-  setCurrent: (blog) => dispatch(setCurrent(blog)),
-  likeBlog: (id) => dispatch(likeBlog(id)),
-  openFormModal: () => dispatch(openFormModal()),
-  setAlert: (alert) => dispatch(setAlert(alert)),
-  removeBlog: (id) => dispatch(removeBlog(id)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Blog);
+export default Blog;

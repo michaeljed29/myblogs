@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import { WidgetContainer, Wrapper, Sort } from "./WidgetStyle";
@@ -9,36 +9,36 @@ import FavoriteIcon from "@material-ui/icons/Favorite";
 import ArrowUpwardIcon from "@material-ui/icons/ArrowUpward";
 import ArrowDownwardIcon from "@material-ui/icons/ArrowDownward";
 
-const Widget = ({
-  openFormModal,
-  isFilteredByFavourite,
-  filterBlog,
-  sort,
-  setSort,
-}) => {
+const Widget = () => {
+  const dispatch = useDispatch();
+  const { isFilteredByFavourite, sort } = useSelector((state) => state.blog);
   const onCreate = () => {
-    openFormModal();
+    dispatch(openFormModal());
   };
 
   const onSort = (type) => () => {
     if (type !== sort.type) {
-      setSort({
-        type,
-        asc: true,
-        des: false,
-      });
+      dispatch(
+        setSort({
+          type,
+          asc: true,
+          des: false,
+        })
+      );
     }
 
     if (type === sort.type && sort.asc) {
-      setSort({
-        type,
-        asc: false,
-        des: true,
-      });
+      dispatch(
+        setSort({
+          type,
+          asc: false,
+          des: true,
+        })
+      );
     }
 
     if (type === sort.type && sort.des) {
-      setSort({});
+      dispatch(setSort({}));
     }
   };
 
@@ -63,7 +63,7 @@ const Widget = ({
           variant={isFilteredByFavourite ? "contained" : "outlined"}
           startIcon={<FavoriteIcon />}
           style={buttonStyle}
-          onClick={() => filterBlog()}
+          onClick={() => dispatch(filterBlog())}
         >
           Filtered By Favourite
         </Button>
@@ -93,15 +93,5 @@ const Widget = ({
     </WidgetContainer>
   );
 };
-const mapStateToProps = (state) => ({
-  isFilteredByFavourite: state.blog.isFilteredByFavourite,
-  sort: state.blog.sort,
-});
 
-const mapDispatchToProps = (dispatch) => ({
-  openFormModal: () => dispatch(openFormModal()),
-  filterBlog: () => dispatch(filterBlog()),
-  setSort: (sort) => dispatch(setSort(sort)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Widget);
+export default Widget;

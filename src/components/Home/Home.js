@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { isEmpty } from "lodash";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
 import DialogActions from "@material-ui/core/DialogActions";
@@ -39,23 +38,19 @@ const initialBlog = {
   liked: false,
 };
 
-const Home = ({
-  history,
-  addBlog,
-  editBlog,
-  current,
-  removeCurrent,
-  isOpenFormModal,
-  closeFormModal,
-  setAlert,
-  searchKey,
-  setCurrentPage,
-  currentPage,
-  currentBlogCount,
-  blogPerPage,
-  searchBlog,
-}) => {
+const Home = ({ history }) => {
+  const dispatch = useDispatch();
   const [blog, setBlog] = useState(initialBlog);
+
+  const {
+    blogs,
+    current,
+    currentPage,
+    searchKey,
+    currentBlogCount,
+    blogPerPage,
+  } = useSelector((state) => state.blog);
+  const { isOpenFormModal } = useSelector((state) => state.util);
 
   const { title, description, content, liked } = blog;
 
@@ -64,8 +59,8 @@ const Home = ({
   }, [current]);
 
   const handleCloseFormModal = () => {
-    removeCurrent(removeCurrent);
-    closeFormModal();
+    dispatch(removeCurrent());
+    dispatch(closeFormModal());
     setBlog(initialBlog);
   };
 
@@ -75,28 +70,30 @@ const Home = ({
     const { title, content, description } = blog;
 
     if (!title.trim() || !content.trim() || !description.trim()) {
-      setAlert({ type: "error", msg: "All Fields are Required" });
+      dispatch(setAlert({ type: "error", msg: "All Fields are Required" }));
       return;
     }
 
     if (!isEmpty(current)) {
-      editBlog(blog);
+      dispatch(editBlog(blog));
       setBlog(initialBlog);
       closeFormModal();
-      setAlert({ type: "success", msg: "Blog Successfully updated!" });
+      dispatch(
+        setAlert({ type: "success", msg: "Blog Successfully updated!" })
+      );
       return;
     }
 
-    addBlog(blog);
+    dispatch(addBlog(blog));
     setBlog(initialBlog);
     closeFormModal();
-    setAlert({ type: "success", msg: "Blog Successfully added!" });
+    dispatch(setAlert({ type: "success", msg: "Blog Successfully added!" }));
   };
 
   const onChange = (e) => setBlog({ ...blog, [e.target.name]: e.target.value });
 
   const onPaginate = (e, page) => {
-    setCurrentPage(page);
+    dispatch(setCurrentPage(page));
   };
 
   const pageCount = Math.ceil(currentBlogCount / blogPerPage);
@@ -216,7 +213,7 @@ const Home = ({
             </p>
             <ClearIcon
               style={{ fontSize: 20, cursor: "pointer" }}
-              onClick={() => searchBlog("")}
+              onClick={() => dispatch(searchBlog(""))}
             />
           </SearchInfo>
         )}
@@ -238,25 +235,4 @@ const Home = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  blogs: state.blog.blogs,
-  current: state.blog.current,
-  currentPage: state.blog.currentPage,
-  searchKey: state.blog.searchKey,
-  currentBlogCount: state.blog.currentBlogCount,
-  blogPerPage: state.blog.blogPerPage,
-  isOpenFormModal: state.util.isOpenFormModal,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  addBlog: (blog) => dispatch(addBlog(blog)),
-  editBlog: (blog) => dispatch(editBlog(blog)),
-  removeCurrent: () => dispatch(removeCurrent()),
-  openFormModal: () => dispatch(openFormModal()),
-  closeFormModal: () => dispatch(closeFormModal()),
-  setAlert: (alert) => dispatch(setAlert(alert)),
-  setCurrentPage: (pageCount) => dispatch(setCurrentPage(pageCount)),
-  searchBlog: (searchKey) => dispatch(searchBlog(searchKey)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;

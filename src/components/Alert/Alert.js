@@ -1,11 +1,14 @@
 import React from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
 import { removeAlert } from "../../actions/utilAction";
 import Fade from "@material-ui/core/Fade";
 
-const Alert = ({ alert, isOpenAlert, removeAlert }) => {
+const Alert = () => {
+  const dispatch = useDispatch();
+  const { alert, isOpenAlert } = useSelector((state) => state.util);
+
   return (
     <Snackbar
       autoHideDuration={5000}
@@ -15,7 +18,7 @@ const Alert = ({ alert, isOpenAlert, removeAlert }) => {
         if (reason === "clickaway") {
           return;
         }
-        removeAlert();
+        dispatch(removeAlert());
       }}
       key={"top" + "center"}
       TransitionComponent={Fade}
@@ -33,13 +36,4 @@ const Alert = ({ alert, isOpenAlert, removeAlert }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  isOpenAlert: state.util.isOpenAlert,
-  alert: state.util.alert,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  removeAlert: () => dispatch(removeAlert()),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Alert);
+export default Alert;

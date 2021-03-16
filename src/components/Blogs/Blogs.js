@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { BlogsContainer, FeedBack } from "./BlogsStyle";
 import Blog from "../Blog/Blog";
 import { isEmpty } from "lodash";
 import moment from "moment";
 import { setCurrentBlogCount } from "../../actions/blogAction";
 
-const Blogs = ({
-  history,
-  blogs,
-  searchKey,
-  isFilteredByFavourite,
-  sort,
-  currentPage,
-  blogPerPage,
-  setCurrentBlogCount,
-}) => {
+const Blogs = ({ history }) => {
+  const dispatch = useDispatch();
+  const {
+    blogs,
+    searchKey,
+    sort,
+    isFilteredByFavourite,
+    currentPage,
+    blogPerPage,
+  } = useSelector((state) => state.blog);
+
   let blogList = blogs;
 
   if (searchKey) {
@@ -33,7 +34,7 @@ const Blogs = ({
   }
 
   useEffect(() => {
-    setCurrentBlogCount(blogList.length);
+    dispatch(setCurrentBlogCount(blogList.length));
   }, [blogList]);
 
   const indexLastBlog = currentPage * blogPerPage;
@@ -79,17 +80,4 @@ const Blogs = ({
   );
 };
 
-const mapStateToProps = (state) => ({
-  blogs: state.blog.blogs,
-  searchKey: state.blog.searchKey,
-  isFilteredByFavourite: state.blog.isFilteredByFavourite,
-  sort: state.blog.sort,
-  currentPage: state.blog.currentPage,
-  blogPerPage: state.blog.blogPerPage,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  setCurrentBlogCount: (blogCount) => dispatch(setCurrentBlogCount(blogCount)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(Blogs);
+export default Blogs;

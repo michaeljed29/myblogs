@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { connect } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { isEmpty } from "lodash";
 import moment from "moment";
 import {
@@ -16,18 +16,20 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import ArrowBackIcon from "@material-ui/icons/ArrowBack";
 import { likeBlog, removeCurrent } from "../../actions/blogAction";
 
-const BlogView = ({ current, history, removeCurrent, likeBlog }) => {
+const BlogView = ({ history }) => {
+  const dispatch = useDispatch();
+  const { current } = useSelector((state) => state.blog);
   const { id, title, content, liked, createdAt } = current;
 
   useEffect(() => {
     if (isEmpty(current)) history.push("/");
   }, current);
   const onLike = () => {
-    likeBlog(id);
+    dispatch(likeBlog(id));
   };
 
   const onBack = () => {
-    removeCurrent();
+    dispatch(removeCurrent());
     history.push("/");
   };
   return (
@@ -60,13 +62,4 @@ const BlogView = ({ current, history, removeCurrent, likeBlog }) => {
   );
 };
 
-const mapStateToProps = (state) => ({
-  current: state.blog.current,
-});
-
-const mapDispatchToProps = (dispatch) => ({
-  removeCurrent: () => dispatch(removeCurrent()),
-  likeBlog: (id) => dispatch(likeBlog(id)),
-});
-
-export default connect(mapStateToProps, mapDispatchToProps)(BlogView);
+export default BlogView;
