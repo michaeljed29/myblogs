@@ -1,5 +1,5 @@
 import axios from 'axios'
 
-const url = process.env.SERVER_URL;
+const url = 'http://localhost:5000'
 
-export const getPosts = () => axios.get(`${url}/posts`)
+export const getPosts = () => axios.get(`${url}/api/posts`)
