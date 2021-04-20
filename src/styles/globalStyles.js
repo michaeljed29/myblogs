@@ -1,7 +1,7 @@
-import { createGlobalStyle } from "styled-components";
-import { black, primaryColor, dirtyWhite, darkPrimary } from "./colors";
-import { containerWidth } from "./sizes";
-import { primaryFont } from "./fonts";
+import { createGlobalStyle } from 'styled-components'
+import { black, primaryColor, dirtyWhite, darkPrimary } from './colors'
+import { containerWidth } from './sizes'
+import { primaryFont } from './fonts'
 
 export default createGlobalStyle`
   * {
@@ -76,4 +76,4 @@ export default createGlobalStyle`
       border-color: ${darkPrimary} !important;
     }
   }
-`;
+`
