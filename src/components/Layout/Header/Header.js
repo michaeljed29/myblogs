@@ -1,4 +1,6 @@
 import React from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { setTheme } from '../../../redux/theme/themeSlice'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import IconButton from '@material-ui/core/IconButton'
@@ -14,8 +16,12 @@ import MailIcon from '@material-ui/icons/Mail'
 import NotificationsIcon from '@material-ui/icons/Notifications'
 import MoreIcon from '@material-ui/icons/MoreVert'
 import useStyles from './styles'
+import Brightness7Icon from '@material-ui/icons/Brightness7'
+import Brightness4Icon from '@material-ui/icons/Brightness4'
 
 const Header = () => {
+	const dispatch = useDispatch()
+	const { isLight } = useSelector((state) => state.theme)
 	const classes = useStyles()
 	const [anchorEl, setAnchorEl] = React.useState(null)
 	const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null)
@@ -38,6 +44,10 @@ const Header = () => {
 
 	const handleMobileMenuOpen = (event) => {
 		setMobileMoreAnchorEl(event.currentTarget)
+	}
+
+	const handleSetTheme = () => {
+		dispatch(setTheme())
 	}
 
 	const menuId = 'primary-search-account-menu'
@@ -67,6 +77,12 @@ const Header = () => {
 			open={isMobileMenuOpen}
 			onClose={handleMobileMenuClose}
 		>
+			<MenuItem onClick={handleSetTheme}>
+				<IconButton aria-label='show 4 new mails' color='inherit'>
+					{isLight ? <Brightness4Icon /> : <Brightness7Icon />}
+				</IconButton>
+				<p>{isLight ? 'Dark Theme' : 'Light Theme'}</p>
+			</MenuItem>
 			<MenuItem>
 				<IconButton aria-label='show 4 new mails' color='inherit'>
 					<Badge badgeContent={4} color='secondary'>
@@ -128,6 +144,9 @@ const Header = () => {
 					</div>
 
 					<div className={classes.sectionDesktop}>
+						<IconButton onClick={handleSetTheme} color='inherit'>
+							{isLight ? <Brightness4Icon /> : <Brightness7Icon />}
+						</IconButton>
 						<IconButton aria-label='show 4 new mails' color='inherit'>
 							<Badge badgeContent={4} color='secondary'>
 								<MailIcon />

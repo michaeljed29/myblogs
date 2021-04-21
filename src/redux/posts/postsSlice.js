@@ -6,18 +6,20 @@ const initialState = {
 	error: null,
 }
 
-export const postsSlice = createSlice({
+const postsSlice = createSlice({
 	name: 'posts',
 	initialState,
 	reducers: {
 		getPosts: (state) => {
-			return { loading: true }
+			state.loading = true
 		},
 		getPostsSuccess: (state, { payload }) => {
-			return { loading: false, error: null, data: payload }
+			state.error = null
+			state.data = payload
 		},
 		getPostsFail: (state, { payload }) => {
-			return { loading: false, error: payload }
+			state.loading = false
+			state.error = payload
 		},
 	},
 })

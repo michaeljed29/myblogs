@@ -1,6 +1,9 @@
 import React from 'react'
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles'
+import { useSelector } from 'react-redux'
 import { primaryColor } from '../../styles/colors'
+import { useMediaQuery } from '@material-ui/core'
+import { white } from '../../styles/colors'
 import {
 	MontserratRegular,
 	MontserratItalic,
@@ -9,16 +12,20 @@ import {
 	MontserratBold,
 	FugazOneRegular,
 } from '../../styles/fonts'
+import { useTheme } from '@material-ui/core/styles'
 
 const Theme = ({ children }) => {
-	const isDark = false
+	const { isLight } = useSelector((state) => state.theme)
+	const defaultTheme = useTheme()
+	const matches = useMediaQuery(defaultTheme.breakpoints.up('sm'))
 
 	const theme = createMuiTheme({
 		palette: {
 			primary: {
 				main: primaryColor,
+				contrastText: white,
 			},
-			type: isDark ? 'dark' : 'light',
+			type: isLight ? 'light' : 'dark',
 		},
 		typography: {
 			fontFamily: 'Montserrat, sans-serif',
@@ -39,14 +46,13 @@ const Theme = ({ children }) => {
 						FugazOneRegular,
 					],
 					section: {
-						padding: '5rem 0',
+						padding: `${matches ? '5rem 0' : '2rem 0'}`,
 					},
 				},
 			},
 		},
 	})
 
-	theme.palette.type = 'light'
 	return <ThemeProvider theme={theme}>{children}</ThemeProvider>
 }
 

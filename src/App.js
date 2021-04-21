@@ -27,22 +27,26 @@ import store from './redux/store'
 function App() {
 	return (
 		<>
-			<Theme>
-				<CssBaseline />
-				<Provider store={store}>
+			<Provider store={store}>
+				<Theme>
+					<>
+						<CssBaseline />
+						<Router>
+							<Header />
+							{/* <Alert /> */}
+							<Switch>
+								<Route exact path='/' component={Home} />
+								{/* <Route exact path='/blog-view' component={BlogView} /> */}
+								<Route component={NotFound} />
+							</Switch>
+						</Router>
+					</>
+
 					{/* <PersistGate loading={null} persistor={persistor}> */}
-					<Router>
-						<Header />
-						{/* <Alert /> */}
-						<Switch>
-							<Route exact path='/' component={Home} />
-							{/* <Route exact path='/blog-view' component={BlogView} /> */}
-							<Route component={NotFound} />
-						</Switch>
-					</Router>
+
 					{/* </PersistGate> */}
-				</Provider>
-			</Theme>
+				</Theme>
+			</Provider>
 		</>
 	)
 }
