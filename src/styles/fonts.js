@@ -16,7 +16,7 @@ export const MontserratRegular = {
 	src: `
     local(${primaryFont}),
     local(${primaryFont + '-Regular'}),
-    url(${MontserratRegularttf}) format('ttf')
+    url(${MontserratRegularttf}) format('truetype')
   `,
 	unicodeRange:
 		'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF',
@@ -30,7 +30,7 @@ export const MontserratItalic = {
 	src: `
     local(${primaryFont}),
     local(${primaryFont + '-Italic'}),
-    url(${MontserratItalicttf}) format('ttf')
+    url(${MontserratItalicttf}) format('truetype')
   `,
 	unicodeRange:
 		'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF',
@@ -44,7 +44,7 @@ export const MontserratMedium = {
 	src: `
     local(${primaryFont}),
     local(${primaryFont + '-Medium'}),
-    url(${MontserratMediumttf}) format('ttf')
+    url(${MontserratMediumttf}) format('truetype')
   `,
 	unicodeRange:
 		'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF',
@@ -72,7 +72,7 @@ export const MontserratBold = {
 	src: `
     local(${primaryFont}),
     local(${primaryFont + '-Bold'}),
-    url(${MontserratBoldttf}) format('ttf')
+    url(${MontserratBoldttf}) format('truetype')
   `,
 	unicodeRange:
 		'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF',
@@ -86,7 +86,7 @@ export const FugazOneRegular = {
 	src: `
     local(${logoFont}),
     local(${logoFont + '-Regular'}),
-    url(${FugazOneRegularttf}) format('ttf')
+    url(${FugazOneRegularttf}) format('truetype')
   `,
 	unicodeRange:
 		'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF',
