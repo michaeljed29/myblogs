@@ -1,5 +1,5 @@
 import { takeLatest, all, call, put } from 'redux-saga/effects'
-import { GET_POSTS, getPostsSuccess, getPostsFail } from './postsDuck'
+import { getPosts, getPostsSuccess, getPostsFail } from './postsSlice'
 import * as api from '../../api/posts'
 
 function* handleGetPosts() {
@@ -13,7 +13,7 @@ function* handleGetPosts() {
 }
 
 export function* watchGetPosts() {
-	yield takeLatest(GET_POSTS, handleGetPosts)
+	yield takeLatest(getPosts.type, handleGetPosts)
 }
 
 export default function* postsSagas() {

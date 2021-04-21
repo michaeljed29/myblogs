@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { getPosts } from '../../redux/posts/postsDuck'
+import { getPosts } from '../../redux/posts/postsSlice'
 import { Container } from '@material-ui/core'
 
 const Home = () => {
