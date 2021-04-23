@@ -1,4 +1,4 @@
-import { red } from '@material-ui/core/colors'
+import { red, blue, green } from '@material-ui/core/colors'
 import { makeStyles } from '@material-ui/core/styles'
 
 export default makeStyles((theme) => ({
@@ -14,6 +14,17 @@ export default makeStyles((theme) => ({
 		paddingTop: '56.25%', // 16:9
 	},
 	avatar: {
-		backgroundColor: red[500],
+		backgroundColor: green[500],
+	},
+	actionsSpace: {
+		flex: 1,
+	},
+	cardActions: {
+		'& .edit-btn': {
+			color: blue[300],
+		},
+		'& .delete-btn': {
+			color: red[300],
+		},
 	},
 }))

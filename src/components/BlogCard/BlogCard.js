@@ -12,6 +12,8 @@ import Typography from '@material-ui/core/Typography'
 import FavoriteIcon from '@material-ui/icons/Favorite'
 import ShareIcon from '@material-ui/icons/Share'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
+import EditIcon from '@material-ui/icons/Edit'
+import DeleteIcon from '@material-ui/icons/Delete'
 
 import useStyles from './styles'
 
@@ -49,12 +51,20 @@ const BlogCard = ({ post }) => {
 					{content}
 				</Typography>
 			</CardContent>
-			<CardActions disableSpacing>
-				<IconButton aria-label='add to favorites'>
+			<CardActions disableSpacing className={classes.cardActions}>
+				<IconButton
+					color='primary'
+					className='like-btn'
+					aria-label='add to favorites'
+				>
 					<FavoriteIcon />
 				</IconButton>
-				<IconButton aria-label='share'>
-					<ShareIcon />
+				<div className={classes.actionsSpace}></div>
+				<IconButton className='edit-btn' aria-label='edit'>
+					<EditIcon />
+				</IconButton>
+				<IconButton className='delete-btn' aria-label='delete'>
+					<DeleteIcon />
 				</IconButton>
 			</CardActions>
 		</Card>
