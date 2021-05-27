@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from "react-redux";
 import useStyles from "./styles";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
 import { addPost, editPost } from "../../../redux/posts/postsSlice";
 
 const PostForm = ({ handleCloseModal }) => {
@@ -31,7 +30,7 @@ const PostForm = ({ handleCloseModal }) => {
 						id: current._id,
 						onSuccess() {
 							handleCloseModal();
-							handleReset();
+							onSubmitProps.resetForm();
 						},
 					})
 				);
@@ -43,7 +42,7 @@ const PostForm = ({ handleCloseModal }) => {
 					data: values,
 					onSuccess() {
 						handleCloseModal();
-						handleReset();
+						onSubmitProps.resetForm();
 					},
 				})
 			);

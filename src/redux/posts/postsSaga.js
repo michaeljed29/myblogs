@@ -13,6 +13,7 @@ import {
 	editPostSuccess,
 	editPostFail,
 } from "./postsSlice";
+import { enqueueSnackbar } from "../notifications/notificationsSlice";
 import { setIsOpenDeleteConfirmation } from "../modals/modalsSlice";
 import * as api from "../../api/posts";
 import { omit } from "lodash";
@@ -32,7 +33,10 @@ function* handleAddPost({ payload }) {
 		const { data } = yield call(api.addPost, payload.data);
 
 		yield put(addPostSuccess(data));
-		payload.onSuccess();
+		yield call(payload.onSuccess);
+		yield put(
+			enqueueSnackbar({ message: "Post Successfully added", type: "success" })
+		);
 	} catch (error) {
 		yield put(addPostFail(error.message));
 	}
@@ -43,6 +47,9 @@ function* handleDeletePost({ payload }) {
 		const { data } = yield call(api.deletePost, payload.id);
 		yield put(deleteSuccess(data));
 		yield put(setIsOpenDeleteConfirmation(false));
+		yield put(
+			enqueueSnackbar({ message: "Post successfully deleted", type: "success" })
+		);
 	} catch (error) {
 		yield put(deleteError(error.message));
 	}
@@ -56,7 +63,10 @@ function* handleEditPost({ payload }) {
 		});
 
 		yield put(editPostSuccess(data));
-		payload.onSuccess();
+		yield call(payload.onSuccess);
+		yield put(
+			enqueueSnackbar({ message: "Post successfully updated", type: "success" })
+		);
 	} catch (error) {
 		yield put(editPostFail(error.message));
 	}

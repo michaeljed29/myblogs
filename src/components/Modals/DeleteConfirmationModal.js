@@ -26,9 +26,7 @@ const DeleteConfirmationModal = () => {
 	const classes = useStyles();
 	const { isOpen } = useSelector((state) => state.modals.deleteConfirmation);
 
-	const { current, deleteSuccess, deleteLoading } = useSelector(
-		(state) => state.posts
-	);
+	const { current, deleteLoading } = useSelector((state) => state.posts);
 
 	const onClose = () => {
 		dispatch(setIsOpenDeleteConfirmation(false));
